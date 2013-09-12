@@ -26,6 +26,7 @@
 
 			<!--Content-->
 			<div data-role="content">
+				<input type="search" name="search" id="search-basic" value="" />  
 				<ul data-role="listview" class="expert-list ui-listview">
 
 				</ul>
@@ -43,5 +44,45 @@
 			</div>
 
 		</div>
+
+		<div id="expert" data-role="page" data-expert-id="">
+
+			<div data-role="header">
+				<h1 id="ex-page-title">Professor Peter Watkins</h1>
+			</div><!-- /header -->
+
+			<div data-role="content">	
+				<img id="ex-image" src="images/prof.jpg" class="expert-image" />
+				<h2 id="ex-name">Peter Watkins</h2>		
+				<p id="ex-title">Honarary Professor</p>		
+				<p id="ex-department">School of Physics and Astronomy <br />
+				University of Birmingham</p>		
+				<a id="ex-phone1" href="tel:+44 (0) 121 414 4625" data-role="link" rel="external">+44 (0) 121 414 4625</a><br />
+				<a id="ex-phone2" href="tel:+44 (0) 121 414 4625" data-role="link" rel="external">+44 (0) 121 414 4625</a><br />
+				<a id="ex-email" href="mailto:p.m.watkins@bham.ac.uk" data-role="email" >p.m.watkins@bham.ac.uk</a><br />
+
+			</div>
+			<div data-role="collapsible">
+				<h3>Expertise</h3>
+				<p id="ex-expertise">Particle physics experiments; CERN; LHC; structure of matter – the smallest particles and fundamental forces</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Media Experience</h3>
+				<p id="ex-mediaExperience">Particle physics experiments; CERN; LHC; structure of matter – the smallest particles and fundamental forces</p>
+			</div>
+
+			<div data-role="footer" data-position="fixed">		
+				<div data-role="navbar">
+					<ul>
+						<li>
+						<a href="#" data-icon="arrow-l" data-iconpos="left" data-rel="back">Back</a>
+						</li>
+						<li>
+						<a href="#" data-icon="search" data-iconpos="left">Search</a>
+						</li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+		</div><!-- /page -->
 	</body>
 </html>
