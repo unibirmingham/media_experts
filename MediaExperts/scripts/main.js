@@ -47,7 +47,8 @@ function loadExpert(){
 	expert = $('body').data('expertList')[id]
 	$('#ex-page-title').text(expert.title + " " + expert.name);	
 	$('#ex-title').text(expert.title);	
-	$('#ex-image').attr('src', expert.picture);	
+	// check if exists
+    $('#ex-image').attr('src', expert.picture);	
 	$('#ex-name').text(expert.name);	
 	$('#ex-department').text(expert.department);	
 	$('#ex-phone1').text(expert.phone1);	
