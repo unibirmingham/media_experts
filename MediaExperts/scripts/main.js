@@ -20,20 +20,34 @@ function fetchExpertList() {
 		async:false,
 		success: function(data){
 			$('body').data('expertList', data)
+            
 		}
 	})
+    
 };
 
 function populateExpertList(){
 	var items = []
 	var expertList = $('body').data('expertList')
-	$.each(expertList, function(key, expert) {
-		items.push('<li data-expert-id="' + expert.Id  +'" data-fullname="' + expert.LastName + expert.FirstName + '" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c">' + expert.LastName + ", " + expert.FirstName + '</li>');
-			 
+	
+    $.each(expertList, function(key, expert) {
+		//items.push('<li data-expert-id="' + expert.Id  +'" data-fullname="' + expert.LastName + expert.FirstName + '" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c">' + expert.LastName + ", " + expert.FirstName + '</li>');
+			items.push('<li data-expert-id="' + expert.Id  +'" data-fullname="' + expert.LastName.trim() + expert.FirstName.trim() + '" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c">' +
+			'<div class="ui-btn-inner ui-li">' +
+			'<div class="ui-btn-text">' +
+			'<a href="#expert" class="ui-link-inherit" data-transition="slide">' +
+			'<h3 class="ui-li-heading">' + expert.LastName + ", " + expert.FirstName + '</h3>' +
+			'<p class="ui-li-desc">' + expert.JobTitles + '</p>' +
+			'<p class="ui-li-desc">' + expert.Department + '</p>' +
+			'</a>' +
+			'</div>' +
+			'<span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>' +
+			'</div>' +
+			'</li>'); 
 	});
 	$('.expert-list').html(items.join(''));
     $('.expert-list li').sort(function(a,b){
-        return new String($(a).attr("data-fullname")) < new String($(b).attr("data-fullname"));
+        return $(a).attr("data-fullname") < $(b).attr("data-fullname");
     }).each(function(){
         $(".expert-list").prepend(this);
     })
