@@ -10,6 +10,17 @@ $(function() {
 	});	
     
 
+    
+    //check online status
+    window.addEventListener("offline", function() {
+       
+    });
+    window.addEventListener("online", function() {
+        
+    }); 
+    
+    
+
 });
 
 
@@ -63,8 +74,9 @@ function loadExpert(){
 	expert = $('body').data('expertList')[id]
 	$('#ex-page-title').text(expert.FirstName + " " + expert.LastName);	
 	$('#ex-title').html(expert.JobTitles);	
-	// check if exists
-    if (expert.Picture.length>28 && UrlExists(expert.Picture)) {
+	
+    // check if exists and if network connection
+    if (expert.Picture.length>28 && UrlExists(expert.Picture) && !(navigator.connection.type === Connection.NONE)) {
         $('#ex-image').attr('src', expert.Picture);
     }
     else {
