@@ -1,5 +1,6 @@
 $(function() {
 	fetchExpertList();
+    //fetchExpertListLive();
 	populateExpertList();
 
 	$("#expert" ).on("pagebeforeshow", function(event){loadExpert();})
@@ -19,35 +20,37 @@ function fetchExpertList() {
 		url: 'expert_list.json',
 		async:false,
 		success: function(data){
-			$('body').data('expertList', data)
-            
+			$('body').data('expertList', data)            
 		}
 	})
     
 };
 
+    
 function populateExpertList(){
 	var items = []
-	var expertList = $('body').data('expertList')
-	
+	var expertList = $('body').data('expertList');
     $.each(expertList, function(key, expert) {
+    
 		//items.push('<li data-expert-id="' + expert.Id  +'" data-fullname="' + expert.LastName + expert.FirstName + '" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c">' + expert.LastName + ", " + expert.FirstName + '</li>');
-			items.push('<li data-expert-id="' + expert.Id  +'" data-fullname="' + expert.LastName.trim() + expert.FirstName.trim() + '" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c">' +
+			items.push('<li data-expert-id="' + expert.Id  +'" data-fullname="' + expert.LastName.trim() + expert.FirstName.trim() +'" data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-icon="arrow-r" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-c">' +
 			'<div class="ui-btn-inner ui-li">' +
 			'<div class="ui-btn-text">' +
 			'<a href="#expert" class="ui-link-inherit" data-transition="slide">' +
 			'<h3 class="ui-li-heading">' + expert.LastName + ", " + expert.FirstName + '</h3>' +
 			'<p class="ui-li-desc">' + expert.JobTitles + '</p>' +
 			'<p class="ui-li-desc">' + expert.Department + '</p>' +
+            '<p class="ui-li-desc tags_list">' + expert.Tags + '</p>' +
 			'</a>' +
 			'</div>' +
 			'<span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>' +
 			'</div>' +
 			'</li>'); 
 	});
+
 	$('.expert-list').html(items.join(''));
     $('.expert-list li').sort(function(a,b){
-        return $(a).attr("data-fullname") < $(b).attr("data-fullname");
+        return $(b).attr("data-fullname").toUpperCase().localeCompare($(a).attr("data-fullname").toUpperCase());
     }).each(function(){
         $(".expert-list").prepend(this);
     })
@@ -61,13 +64,47 @@ function loadExpert(){
 	$('#ex-page-title').text(expert.FirstName + " " + expert.LastName);	
 	$('#ex-title').html(expert.JobTitles);	
 	// check if exists
-    $('#ex-image').attr('src', expert.Picture);	
+    if (expert.Picture.length>28 && UrlExists(expert.Picture)) {
+        $('#ex-image').attr('src', expert.Picture);
+    }
+    else {
+        $('#ex-image').attr('src', 'images/prof.png');
+    }
 	$('#ex-name').text(expert.FirstName + " " + expert.LastName);	
 	$('#ex-department').text(expert.Department);	
-	$('#ex-phone1').text(expert.Telephone1);	
-	$('#ex-phone2').text(expert.Telephone2);	
-	$('#ex-email').text(expert.Email);	
-	$('#ex-expertise').html(expert.Expertise);	
-	$('#ex-mediaExperience').html(expert.MediaExperience);	
+	
+    //$('#ex-phone2').text(expert.Telephone2);	
+	$('#ex-mail .ui-btn-text').text(expert.Email)
+    $('#ex-mail').attr("href","mailto:" + expert.Email);	
+    if (expert.Telephone.length>4) {
+        $('#ex-phone1 .ui-btn-text').text(expert.Telephone);
+        $('#ex-phone1').attr("href","tel:" + expert.Telephone);
+	}
+    else {
+        $('#ex-phone1 .ui-btn-text').html("<span class='message-small'>Please contact the Press office</span>");
+        $('#ex-phone1').attr("href","press.html").buttonMarkup({icon: "link"});
+    }
+    $('#ex-expertise').html(expert.Expertise);
+    
+    var experience = expert.MediaExperience;
+    experience.trim();
+
+	if (experience.length>16) { // && !experience=="<br>") {
+        $('#ex-mediaExperience').html(expert.MediaExperience);
+        $('#mediaExperience').show()
+    }	
+    else
+    {
+        $('#mediaExperience').hide();
+    }
+
+}
+
+
+function UrlExists(url) {
+  var http = new XMLHttpRequest();
+  http.open('HEAD', url, false);
+  http.send();
+  return http.status!=404;
 }
 

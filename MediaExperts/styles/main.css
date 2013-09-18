@@ -1,3 +1,36 @@
 .expert-image {
 	float:right;
 }
+
+.tags_list {
+    display:none;
+}
+
+ul.contacts {
+    padding-left:0;
+}
+
+div.contacts .ui-btn-inner {
+    padding-left:28px;
+    font-size:14px;
+}
+
+div#expert-contact {
+
+    
+}
+
+div#expert {
+
+     min-height:150px;   
+}
+
+span.message-small {
+    
+    font-size:80%;
+    
+}
+
+div#press-contacts{
+    padding-top:12px;
+}
