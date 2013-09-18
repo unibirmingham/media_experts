@@ -3,26 +3,37 @@ $(function() {
     //fetchExpertListLive();
 	populateExpertList();
 
-	$("#expert" ).on("pagebeforeshow", function(event){loadExpert();})
+	$("#expert" ).on("pagebeforeshow", function(event){
+
+        loadExpert();
+    });
+    
+
 
 	$('.expert-list li').click(function() {
 		$('#expert').data('expert-id', $(this).data('expert-id'));
+
 	});	
     
+   $(document).on('pagebeforecreate', '[data-role="page"]', function(){     
+    setTimeout(function(){
+        $.mobile.loading('show');
+    },1);    
+});
 
-    
-    //check online status
-    window.addEventListener("offline", function() {
-       
-    });
-    window.addEventListener("online", function() {
-        
-    }); 
-    
+$(document).on('pageshow', '[data-role="page"]', function(){  
+    setTimeout(function(){
+        $.mobile.loading('hide');
+    },300);      
+});
     
 
 });
 
+function refreshList() {
+
+    
+}
 
 
 function fetchExpertList() {
@@ -76,8 +87,8 @@ function loadExpert(){
 	$('#ex-title').html(expert.JobTitles);	
 	
     // check if exists and if network connection
-    if (expert.Picture.length>28 && UrlExists(expert.Picture) && !(navigator.connection.type === Connection.NONE)) {
-        $('#ex-image').attr('src', expert.Picture);
+    if (!(navigator.connection.type === Connection.NONE) && expert.Picture.length>28 && UrlExists(expert.Picture)) {
+            $('#ex-image').attr('src', expert.Picture);
     }
     else {
         $('#ex-image').attr('src', 'images/prof.png');
