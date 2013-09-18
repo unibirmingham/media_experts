@@ -82,7 +82,7 @@ function loadExpert(){
 	}
     else {
         $('#ex-phone1 .ui-btn-text').html("<span class='message-small'>Please contact the Press office</span>");
-        $('#ex-phone1').attr("href","press.html").buttonMarkup({icon: "link"});
+        $('#ex-phone1').attr("href","#press-page").buttonMarkup({icon: "link"});
     }
     $('#ex-expertise').html(expert.Expertise);
     
