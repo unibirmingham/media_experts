@@ -6,11 +6,13 @@
     display:none;
 }
 
-ul.contacts {
+ul.contacts,
+ul.presscontacts {
     padding-left:0;
 }
 
-div.contacts .ui-btn-inner {
+div.contacts .ui-btn-inner,
+div.presscontacts .ui-btn-inner {
     padding-left:28px;
     font-size:14px;
 }
@@ -33,4 +35,13 @@ span.message-small {
 
 div#press-contacts{
     padding-top:12px;
+}
+
+ul.press-list li.press-contact-item p {
+    
+    margin-top: 5px;
+}
+
+li.press-contact-item a {
+    text-decoration: none;
 }

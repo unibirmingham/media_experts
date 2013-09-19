@@ -8,7 +8,10 @@ $(function() {
         loadExpert();
     });
     
+    $("#press-page" ).on("pagebeforeshow", function(event){
 
+        loadPressContacts();
+    });
 
 	$('.expert-list li').click(function() {
 		$('#expert').data('expert-id', $(this).data('expert-id'));
@@ -30,16 +33,32 @@ $(document).on('pageshow', '[data-role="page"]', function(){
 
 });
 
-function refreshList() {
+function loadPressContacts() {
 
-    
+    $.getJSON("data/press_list.json",
+			  function(data) {
+                  $('ul.press-list').empty();
+				  $.each(data, function() {
+                      
+					  var mobilestr = "";
+                      if (this.mobile) {
+                          mobilestr = 'Mobile: <a href="tel:' + this.mobile + '">' + this.mobile + '</a><br />';
+                      }
+                      $('ul.press-list').append('<li class="press-contact-item"><p>' + this.name + ' - <br/><strong>' + this.position + '</strong><br />' + 
+                      'Telephone: <a href="tel:' + this.telephone + '">' + this.telephone + '</a><br />' + mobilestr + 'Email: <a href="mailto:' + this.email + '">' + this.email + '</a></p></li>');
+				  });
+                  $('ul.press-list').listview('refresh');
+				  
+			  }).error(function(error) {
+				  alert(error.message);
+			  });
 }
 
 
 function fetchExpertList() {
 	$.ajax({
 		dataType: "json",
-		url: 'expert_list.json',
+		url: 'data/expert_list.json',
 		async:false,
 		success: function(data){
 			$('body').data('expertList', data)            
