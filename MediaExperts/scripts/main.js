@@ -11,8 +11,9 @@ $(function() {
     $("#press-page" ).on("pagebeforeshow", function(event){
 
         loadPressContacts();
+        
     });
-
+    
 	$('.expert-list li').click(function() {
 		$('#expert').data('expert-id', $(this).data('expert-id'));
 
@@ -48,6 +49,7 @@ function loadPressContacts() {
                       'Telephone: <a href="tel:' + this.telephone + '">' + this.telephone + '</a><br />' + mobilestr + 'Email: <a href="mailto:' + this.email + '">' + this.email + '</a></p></li>');
 				  });
                   $('ul.press-list').listview('refresh');
+                  
 				  
 			  }).error(function(error) {
 				  alert(error.message);
