@@ -1,0 +1,34 @@
+{
+  "ProjectGuid": "586b75a6-66cd-4ca4-99ce-b7a317416904",
+  "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
+  "AppIdentifier": "uk.ac.birmingham.mobile.MediaExperts",
+  "ProjectName": "MediaExperts",
+  "AndroidPermissions": [
+    "android.permission.READ_PHONE_STATE",
+    "android.permission.INTERNET",
+    "android.permission.READ_CONTACTS",
+    "android.permission.WRITE_CONTACTS",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.BROADCAST_STICKY"
+  ],
+  "DeviceOrientations": [
+    "Portrait",
+    "Landscape"
+  ],
+  "iOSStatusBarStyle": "Default",
+  "AndroidHardwareAcceleration": "false",
+  "BundleVersion": "1.4",
+  "iOSDisplayName": "",
+  "iOSDeviceFamily": [
+    "1",
+    "2"
+  ],
+  "iOSBackgroundMode": [],
+  "AndroidVersionCode": "2",
+  "DisplayName": "UoB Media Experts",
+  "Framework": "Cordova",
+  "FrameworkVersion": "3.5.0",
+  "Author": "",
+  "Description": "MediaExperts"
+}
